@@ -7,9 +7,13 @@ public class Person {
 	private String gender;
 	private int age;
 	
-	public Person(String firstName,String lastName,String gender, int age) throws InvalidNameException
+	public Person(String firstName,String lastName,String gender, int age) throws InvalidNameException, InvalidAgeException
 	{
 
+		if(age<=15)
+		{
+			throw new InvalidAgeException("Age must be above 15");
+		}
 		
 		this.firstName = validateName(firstName, "First Name");
 		this.lastName = validateName(lastName, "Last Name");
@@ -22,7 +26,7 @@ public class Person {
 	{
 		if(name==null || name.isBlank())
 		{
-			throw new InvalidNameException(field+ "cannot be blank");
+			throw new InvalidNameException(field+ " cannot be blank");
 		}
 		
 		return name;
@@ -41,7 +45,7 @@ public class Person {
 			Person p = new Person("" ,"Mailavarapu" , "Male" ,26);
 			p.display();
 		}
-		catch(InvalidNameException e)
+		catch(InvalidNameException | InvalidAgeException e)
 		{
 			System.out.println("Error:"+e.getMessage());
 		}
