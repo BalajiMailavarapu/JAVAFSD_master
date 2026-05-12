@@ -7,6 +7,15 @@ public class BankApp {
     public void deposit(double amount) {
         balance += amount;
     }
+    
+    public String deposited(double amount) {
+
+        if(amount > 0) {
+            return "Deposit Success";
+        }
+
+        return "Invalid Amount";
+    }
 
     public double getBalance() {
         return balance;
