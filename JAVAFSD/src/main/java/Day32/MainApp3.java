@@ -1,0 +1,17 @@
+package Day32;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class MainApp3 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		
+		Employee emp =  context.getBean("Employee",Employee.class);
+		emp.work();
+
+	}
+
+}

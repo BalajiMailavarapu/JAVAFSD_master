@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+    
+    <!---Engine bean
+    <bean id="Engine" class = "Day32.Engine">
+    
+    </bean>-->
+    <!---Car bean-
+      <bean id="Car" class = "Day32.Car">
+      
+      <property name = "Engine" ref="Engine"/>
+    
+    </bean>-->
+    <bean id="Laptop" class="Day32.Laptop"/>
+    
+    <bean id= "Employee" class = "Day32.Employee">
+    <property name = "Laptop" ref="Laptop"/>
+    </bean>
+
+</beans>
