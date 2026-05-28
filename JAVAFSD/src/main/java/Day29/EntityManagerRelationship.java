@@ -6,19 +6,23 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
-public  class EntityManager {
+public class EntityManagerRelationship {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("myunit");
-		jakarta.persistence.EntityManager em = emf.createEntityManager();
+		EntityManager em = emf.createEntityManager();
 		
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
+		department d= new department();
+		d.setDept_name("IT");
+		//employee 1
 		emp e1 = new emp();
 		e1.setEmp_name("Balaji");
 		e1.setSalary(50000);
@@ -35,12 +39,35 @@ public  class EntityManager {
 		projectmap.put(2, "Ecommerce");
 		projectmap.put(3, "Hospital management");
 		e1.setProjects(projectmap);
+		//Employee 2
+		emp e2 = new emp();
+		e2.setEmp_name("Gow");
+		e2.setSalary(70000);
+		e2.setEmails(Arrays.asList("Gow@gmail.com","Gow@gmail.com"));
+		Set<String> skillset1 = new HashSet<>();
+		skillset.add("HTML");
+		skillset.add("CSS");
+		skillset.add("React");
 		
-		em.persist(e1);
+		e2.setSkills(skillset1);
+		
+		Map<Integer,String> projectmap1 = new HashMap<>();
+		projectmap1.put(1,"College Management");
+		projectmap1.put(2, "Payroll System");
+		e2.setProjects(projectmap1);
+		
+		//Relationship
+		e1.setDept(d);
+		e2.setDept(d);
+		
+		d.setEmployees(Arrays.asList(e1,e2));
+		
+		em.persist(d);
 		tx.commit();
 		
-		System.out.println("Employee inserted");
+		System.out.println("Department and Employees inserted");
 		
+		//Fetch employee
 		emp e = em.find(emp.class,1);
 		
 		if(e!=null)
@@ -49,8 +76,10 @@ public  class EntityManager {
 			
 			System.out.println("Employee id:"+e.getEmp_id());
 			
-			System.out.println("Employee id:"+e.getSalary());
+			System.out.println("Employee Salary:"+e.getSalary());
 			
+			System.out.println("Department: " +e.getDept().getDept_name());
+
 		}
         em.close();
 		emf.close();

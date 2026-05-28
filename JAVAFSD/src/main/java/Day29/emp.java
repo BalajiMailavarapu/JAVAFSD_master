@@ -11,6 +11,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -38,8 +40,8 @@ public class emp {
 	@Size(min=3,max=20)
 	
 	private String emp_name;
-	@Min(20000)
-	@Max(10000)
+	@Min(10000)
+	@Max(100000)
 	private double salary;
 	
 	@ElementCollection
@@ -50,7 +52,17 @@ public class emp {
 	
 	@ElementCollection
 	private Map<Integer,String> projects = new HashMap<>();
+	
+	@ManyToOne
+	@JoinColumn(name="dept_id")
+	private department dept;
 
+	public department getDept() {
+		return dept;
+	}
+	public void setDept(department dept) {
+		this.dept = dept;
+	}
 	public int getEmp_id() {
 		return emp_id;
 	}

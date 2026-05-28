@@ -6,6 +6,7 @@
 	<persistence-unit name="myunit">
  
 		<class>Day29.emp</class>
+		<class>Day29.department</class>
  
 		<properties>
  
